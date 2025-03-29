@@ -1,0 +1,141 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "llama_anki"
+version = "0.1.0"
+description = "AI-Powered Flashcard Management and Study System"
+readme = "README.md"
+authors = [
+    {name = "LlamaSearch.AI", email = "info@llamasearch.ai"}
+]
+license = {text = "MIT"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Education",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+requires-python = ">=3.9"
+dependencies = [
+    "typer[all]>=0.7.0",
+    "rich>=13.0.0",
+    "sqlite-utils>=3.30",
+    "numpy>=1.22.0",
+    "pandas>=1.4.0",
+    "tqdm>=4.64.0",
+    "requests>=2.28.0",
+    "flask>=2.2.0",
+    "nltk>=3.7",
+    "scikit-learn>=1.1.0",
+    "pyyaml>=6.0",
+    "python-dotenv>=1.0.0",
+    "matplotlib>=3.6.0",
+    "tabulate>=0.9.0",
+    "appdirs>=1.4.4",
+]
+
+[project.optional-dependencies]
+llm = [
+    "llm>=0.12.0",
+]
+mlx = [
+    "mlx>=0.0.5",
+    "mlx-lm>=0.0.3",
+]
+openai = [
+    "openai>=1.0.0", 
+    "tiktoken>=0.4.0",
+    "langchain>=0.0.200",
+    "langchain-openai>=0.0.1",
+]
+pdf = [
+    "pypdf>=3.0.0",
+    "pdfminer.six>=20221105",
+    "pymupdf>=1.22.0",
+    "pillow>=10.0.0",
+    "pytesseract>=0.3.10",
+    "tabula-py>=2.8.2",
+]
+transformers = [
+    "transformers>=4.20.0",
+    "torch>=2.0.0",
+    "sentence-transformers>=2.2.0",
+]
+server = [
+    "datasette>=0.64.3",
+    "datasette-render-markdown>=2.1.1",
+]
+llama-cpp = [
+    "llama-cpp-python>=0.1.0",
+]
+anki = [
+    "aqt>=2.1.60",
+]
+interactive = [
+    "prompt_toolkit>=3.0.0",
+    "inquirer>=3.1.0",
+]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "mypy>=1.0.0",
+    "ruff>=0.0.270",
+    "pre-commit>=3.3.2",
+    "coverage>=7.2.7",
+]
+all = [
+    "llama_anki[llm,mlx,openai,pdf,transformers,server,llama-cpp,anki,interactive,dev]",
+]
+
+[project.scripts]
+llamaanki = "llama_anki.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/LlamaSearch/llamaanki"
+Documentation = "https://llamaanki.readthedocs.io"
+Repository = "https://github.com/LlamaSearch/llamaanki"
+Issues = "https://github.com/LlamaSearch/llamaanki/issues"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = ["llama_anki"]
+
+[tool.black]
+line-length = 100
+target-version = ["py39", "py310", "py311"]
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+select = ["E", "F", "B", "I"]
+ignore = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_functions = "test_*"
+python_classes = "Test*"
+addopts = "--verbose --cov=llama_anki --cov-report=term --cov-report=xml" 
