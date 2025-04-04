@@ -3,12 +3,12 @@ requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "llama_anki"
+name = "llama_anki-llamasearch"
 version = "0.1.0"
 description = "AI-Powered Flashcard Management and Study System"
 readme = "README.md"
 authors = [
-    {name = "LlamaSearch.AI", email = "info@llamasearch.ai"}
+    {name = "llama_anki-llamasearch", email = "nikjois@llamasearch.ai"}
 ]
 license = {text = "MIT"}
 classifiers = [
